@@ -31,3 +31,18 @@ h4 {
 a {
   color: rgb(56, 56, 56);
 }
+.nutrients-select {
+  display: flex;
+  justify-content: space-between;
+}
+.nutrient {
+  margin-bottom: 0.5rem;
+}
+.nutrient div {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+}
+.nutrient div input {
+  margin-right: 1rem;
+}

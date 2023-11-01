@@ -4,30 +4,27 @@ import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function Search() {
-    const numRecipes = 8;
+    // const numRecipes = 8;
     const [input, setInput] = useState("");
-    const [cuisine, setCuisine] = useState([]);
+    // const [cuisine, setCuisine] = useState([]);
     const navigate = useNavigate();
 
     const submitHandler = (e) => {
         e.preventDefault();
         navigate("/searched/" + input);
     };
-    const getCuisine = async (name) => {
-        const data = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&number=${numRecipes}&cuisine=${name}`);
-        const recipes = await data.json();
-        setCuisine(recipes.results);
-    };
-    useEffect(() => {
-        getCuisine();
-    }, []);
+    // const getCuisine = async (name) => {
+    //     const data = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&number=${numRecipes}&cuisine=${name}`);
+    //     const recipes = await data.json();
+    //     setCuisine(recipes.results);
+    // };
+    // useEffect(() => {
+    //     getCuisine();
+    // }, []);
     return (
         <FormStyle onSubmit={submitHandler}>
             <FaSearch></FaSearch>
-            <input onChange={(e) => setInput(e.target.value)} type="text" value={input} placeholder="I want to cook..." />
-            {/* <select name="cuisine-select" id="cuisine-select">
-                <option></option>
-            </select> */}
+            <input onChange={(e) => setInput(e.target.value)} type="text" value={input} placeholder="I want to cook... | Type ingredient, nutrient or dish" />
         </FormStyle>
     );
 }
@@ -49,6 +46,8 @@ const FormStyle = styled.form`
         border-radius: 1rem;
         outline: none;
         width: 100%;
+        font-size: 17px;
+        padding: 1rem 1rem 1rem 3rem;
     }
     svg {
         position: absolute;

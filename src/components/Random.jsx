@@ -4,41 +4,41 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { Link } from "react-router-dom";
 
-const Popular = () => {
-    const [veggie, setVeggie] = useState([]);
+const Random = () => {
+    const [random, setRandom] = useState([]);
 
     useEffect(() => {
-        getVeggie();
+        getRandom();
     }, []);
 
-    const getVeggie = async () => {
+    const getRandom = async () => {
         const numRecipes = 9;
         //set data in localstorage for cached data
-        const check = localStorage.getItem("veggie");
+        const check = localStorage.getItem("random");
         if (check) {
-            setVeggie(JSON.parse(check));
+            setRandom(JSON.parse(check));
         } else {
             const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=${numRecipes}`);
             const data = await api.json();
-            localStorage.setItem("veggie", JSON.stringify(data.recipes));
-            setVeggie(data.recipes);
+            localStorage.setItem("random", JSON.stringify(data.recipes));
+            setRandom(data.recipes);
         }
     };
 
     return (
         <div>
             <Wrapper>
-                <h3>Veggie Picks:</h3>
+                <h3>Random Recipes:</h3>
                 <Splide
                     options={{
-                        perPage: 3,
+                        perPage: 4,
                         arrows: false,
                         paginations: false,
                         drag: "free",
                         gap: "1rem",
                     }}
                 >
-                    {veggie.map((recipe) => {
+                    {random.map((recipe) => {
                         return (
                             <SplideSlide key={recipe.id}>
                                 <Card>
@@ -98,4 +98,4 @@ const Gradient = styled.div`
     height: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
 `;
-export default Popular;
+export default Random;
