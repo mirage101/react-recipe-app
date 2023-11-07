@@ -30,11 +30,19 @@ function Recipe() {
                     {console.log(details.winePairing)}
                     <img src={details.image} alt="" />
                     <div className="pairing-wines">
-                        <h5>
-                            <span>Suggested wines for this dish:</span>
-                            {details.winePairing && details.winePairing.pairedWines.map((wine) => <div key={wine}>&nbsp;{wine}&nbsp;</div>)}
-                        </h5>
-                        <h6>Wine pairing explained: {details.winePairing && details.winePairing.pairingText}</h6>
+                        {details.winePairing && details.winePairing.pairedWines.length > 0 && (
+                            <h5>
+                                <span>Suggested wines for this dish:</span>
+                                <div className="wines">
+                                    {details.winePairing.pairedWines.map((wine) => (
+                                        <div key={wine}>&nbsp;{wine}&nbsp;</div>
+                                    ))}
+                                </div>
+                            </h5>
+                        )}
+                        {details.winePairing && details.winePairing.pairingText.length > 0 && (
+                            <h6>Wine pairing explained: {details.winePairing.pairingText}</h6>
+                        )}
                     </div>
                 </div>
                 <Info>
@@ -102,6 +110,10 @@ const DetailWrapper = styled.div`
     h5 {
         display: flex;
         padding: 1rem 0 1rem 0;
+    }
+    h5, .wines {
+        display: flex;
+        flex-direction:column;
     }
 `;
 const Button = styled.button`
